@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+
+}
+
+group = 'kz.autotest'
+version = '1.0-SNAPSHOT'
+
+allure {
+    report {
+        version.set("2.19.0")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5{
+                adapterVersion.set("2.19.0")
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+    testImplementation (
+            'org.junit.jupiter:junit-jupiter:5.8.1',
+            'com.codeborne:selenide:6.19.0',
+            'io.qameta.allure:allure-selenide:2.19.0',
+            'org.assertj:assertj-core:3.24.2',
+            'org.slf4j:slf4j-simple:2.0.9'
+    )
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('user_test', Test) {
+    useJUnitPlatform {
+        includeTags("user")
+    }
+}
