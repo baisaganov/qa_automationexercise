@@ -13,7 +13,7 @@ public abstract class TestBase {
 
     @BeforeAll
     static void configurationSettings(){
-        Configuration.remote = "http://31.129.109.167:8080/wd/hub";
+        Configuration.remote = System.getProperty("remote_driver_url");
         Configuration.browser = "chrome";
         Configuration.browserVersion = "117.0";
     }
