@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 
 public class UserTest {
 
-    private String user_email = (Math.random()*Math.random())+"@dasdaz.das";
+    private static final String user_email = (Math.random()*Math.random())+"@dasdaz.das";
 
     static final Filter FORCE_JSON_RESPONSE_BODY = (reqSpec, respSpec, ctx) -> {
         Response response = ctx.next(reqSpec, respSpec);
@@ -132,7 +132,7 @@ public class UserTest {
                 .multiPart("password", "123")
                 .when()
                 .delete("https://automationexercise.com/api/deleteAccount")
-                .then().log().all()
+                .then()
                 .body("responseCode", is(200))
                 .and()
                 .body("message", is("Account deleted!"));
