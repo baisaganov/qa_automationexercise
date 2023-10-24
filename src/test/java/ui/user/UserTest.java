@@ -15,7 +15,7 @@ public class UserTest extends TestBase {
 
     private final static String USER_NAME = "Alisher";
     private final static String USER_LASTNAME = "Baisaganov";
-    private final static String USER_EMAIL = "test1@gamail.cum33";
+    private final static String USER_EMAIL = "test1@gamail.cum333";
     private final static String USER_PASSWORD = "Password1";
 
     @Test
