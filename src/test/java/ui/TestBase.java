@@ -16,6 +16,7 @@ public abstract class TestBase {
         Configuration.remote = System.getProperty("remote_driver_url");
         Configuration.browser = "chrome";
         Configuration.browserVersion = "117.0";
+        System.out.println(System.getProperty("remote_driver_url"));
     }
 
     @BeforeEach
