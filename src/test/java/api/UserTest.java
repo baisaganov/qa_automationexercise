@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 
 public class UserTest {
 
-    private static final String user_email = (Math.random()*Math.random())+"@dasdaz.das";
+    private static final String user_email = System.getProperty("user_registration_email");
 
     static final Filter FORCE_JSON_RESPONSE_BODY = (reqSpec, respSpec, ctx) -> {
         Response response = ctx.next(reqSpec, respSpec);
