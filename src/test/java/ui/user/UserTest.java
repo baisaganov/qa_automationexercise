@@ -1,25 +1,25 @@
 package ui.user;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.TestBase;
 
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
+@Tag("user")
 public class UserTest extends TestBase {
 
     private final static String USER_NAME = "Alisher";
     private final static String USER_LASTNAME = "Baisaganov";
-    private final static String USER_EMAIL = "test1@gamail.cum333";
+    private final static String USER_EMAIL = "tes4@gamail.com";
     private final static String USER_PASSWORD = "Password1";
 
+
     @Test
-    @Tags({@Tag("user"), @Tag("registration")})
+    @Tag("registration")
     @DisplayName("Регистрация пользователя")
     void registerUser(){
         step("Open page", () -> {
@@ -90,11 +90,10 @@ public class UserTest extends TestBase {
             $("h2[data-qa=account-created]").shouldHave(Condition.text("Account Created!"));
             $("a[data-qa=continue-button]").shouldBe(Condition.visible).click();
         });
-
     }
 
     @Test
-    @Tags({@Tag("user"), @Tag("login")})
+    @Tag("login")
     @DisplayName("Авторизация")
     void loginUser(){
         step("Open page", () -> {
@@ -107,8 +106,8 @@ public class UserTest extends TestBase {
                     .filter(Condition.text(" Signup / Login")).first()
                     .click();
             $("div.login-form").should(Condition.visible);
-            $("div.login-form input[data-qa=login-email]").shouldBe(Condition.visible).setValue(USER_EMAIL);
-            $("div.login-form input[data-qa=login-password]").shouldBe(Condition.visible).setValue(USER_PASSWORD);
+            $("div.login-form input[data-qa=login-email]").shouldBe(Condition.visible).setValue("test3@gamail.com");
+            $("div.login-form input[data-qa=login-password]").shouldBe(Condition.visible).setValue("Password1");
             $("div.login-form button[data-qa=login-button]").shouldBe(Condition.visible).click();
         });
 
@@ -120,5 +119,4 @@ public class UserTest extends TestBase {
         });
 
     }
-
 }

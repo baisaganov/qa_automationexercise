@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -12,9 +13,9 @@ public abstract class TestBase {
 
     @BeforeAll
     static void configurationSettings(){
-//        Configuration.remote = "http://31.129.109.167:8080/wd/hub";
-//        Configuration.browser = "chrome";
-//        Configuration.browserVersion = "117.0";
+        Configuration.remote = "http://31.129.109.167:8080/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserVersion = "117.0";
     }
 
     @BeforeEach
@@ -28,6 +29,7 @@ public abstract class TestBase {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
+        Selenide.closeWebDriver();
 //        Attach.addVideo();
     }
 

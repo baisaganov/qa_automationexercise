@@ -43,10 +43,14 @@ dependencies {
 }
 
 test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
+    }
     useJUnitPlatform()
 }
 
-tasks.register('user_test', Test) {
+tasks.register('user_tests', Test) {
     useJUnitPlatform {
         includeTags("user")
     }
