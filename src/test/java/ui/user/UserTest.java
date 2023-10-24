@@ -14,7 +14,7 @@ public class UserTest extends TestBase {
 
     private final static String USER_NAME = "Alisher";
     private final static String USER_LASTNAME = "Baisaganov";
-    private final static String USER_EMAIL = "tes4@gamail.com";
+    private final static String USER_EMAIL = System.getProperty("user_registration_email", "adam@gamail.com");
     private final static String USER_PASSWORD = "Password1";
 
 
