@@ -1,5 +1,6 @@
 package api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.internal.RestAssuredResponseOptionsImpl;
@@ -7,6 +8,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
@@ -26,7 +29,7 @@ public class UserTest {
     @Tag("user_api")
     void postLoginTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .accept(ContentType.JSON)
                 .contentType(ContentType.MULTIPART)
                 .multiPart("email", "test3@gamail.com")
@@ -44,7 +47,7 @@ public class UserTest {
     @Tag("user_api")
     void postErrorWithoutEmailLoginTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .accept(ContentType.JSON)
                 .contentType(ContentType.MULTIPART)
                 .multiPart("password", "Password1")
@@ -62,7 +65,7 @@ public class UserTest {
     void deleteToVerifyLoginTest(){
         given()
                 .urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .when()
                 .delete("https://automationexercise.com/api/verifyLogin")
                 .then().log().all()
@@ -77,7 +80,7 @@ public class UserTest {
     void postErrorWithInvalidValuesToVerifyLoginTest(){
         given()
                 .urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .multiPart("email", "123")
                 .multiPart("password", "123")
                 .when()
@@ -94,8 +97,9 @@ public class UserTest {
     void postCreateUserTest(){
         given()
                 .urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
-                .multiPart("email", user_email)
+                .log().parameters()
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
+                .multiPart("email", "user_email@reas.fs" + new Random().nextInt())
                 .multiPart("password", "123")
                 .multiPart("name", "123")
                 .multiPart("title", "Mr")
@@ -127,7 +131,7 @@ public class UserTest {
     void deleteUserAccountTest(){
         given()
                 .urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .multiPart("email", user_email)
                 .multiPart("password", "123")
                 .when()

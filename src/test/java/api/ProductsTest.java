@@ -1,5 +1,6 @@
 package api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
@@ -26,7 +27,7 @@ public class ProductsTest {
     @Tag("products_api")
     void getAllProductsTest(){
         given()
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .get("https://automationexercise.com/api/productsList")
                 .then()
                 .statusCode(200)
@@ -38,7 +39,7 @@ public class ProductsTest {
     @Tag("products_api")
     void postAllProductsTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .when()
                 .post("https://automationexercise.com/api/productsList")
                 .then()
@@ -52,7 +53,7 @@ public class ProductsTest {
     @Tag("products_api")
     void getAllBrandsListTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .get("https://automationexercise.com/api/brandsList")
                 .then()
                 .body("responseCode", is(200))
@@ -65,7 +66,7 @@ public class ProductsTest {
     @Tag("products_api")
     void putToAllBrandsListTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .put("https://automationexercise.com/api/brandsList")
                 .then()
                 .body("responseCode", is(405))
@@ -78,7 +79,7 @@ public class ProductsTest {
     @Tag("products_api")
     void postToSearchProductTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .accept(ContentType.JSON)
                 .contentType(ContentType.MULTIPART)
                 .multiPart("search_product", "top")
@@ -95,7 +96,7 @@ public class ProductsTest {
     @Tag("products_api")
     void postErrorToSearchProductTest(){
         given().urlEncodingEnabled(true)
-                .filters(FORCE_JSON_RESPONSE_BODY)
+                .filters(FORCE_JSON_RESPONSE_BODY, new AllureRestAssured())
                 .accept(ContentType.JSON)
                 .contentType(ContentType.MULTIPART)
                 .when()
